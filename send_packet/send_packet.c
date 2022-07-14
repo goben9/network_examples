@@ -9,13 +9,14 @@
 #include <netinet/in.h>
 	
 #define PORT	 8080
+#define SERVER   "127.0.0.1"
 #define MAXLINE 1024
 	
 // Driver code
 int main() {
 	int sockfd;
 	char buffer[MAXLINE];
-	char *hello = "Hello from client, test";
+	char *hello = "Hello from client, this is another test";
 	struct sockaddr_in	 servaddr;
 	
 	// Creating socket file descriptor
@@ -29,9 +30,11 @@ int main() {
 	// Filling server information
 	servaddr.sin_family = AF_INET;
 	servaddr.sin_port = htons(PORT);
-	servaddr.sin_addr.s_addr = INADDR_ANY;
-		
-	int n, len;
+
+	if (inet_aton(SERVER , &servaddr.sin_addr) == 0) {
+        fprintf(stderr, "inet_aton() failed\n");
+        exit(EXIT_FAILURE);
+    }
 		
 	sendto(sockfd, (const char *)hello, strlen(hello),
 		MSG_CONFIRM, (const struct sockaddr *) &servaddr,
