@@ -11,7 +11,7 @@ int main() {
 
     // get the addresses of stackoverflow.com:
 
-    he = gethostbyname("stackoverflow.com");
+    he = gethostbyname("openu.ac.il");
     if (he == NULL) { // do some error checking
         herror("gethostbyname"); // herror(), NOT perror()
         return -1;
