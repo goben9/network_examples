@@ -16,11 +16,11 @@
 int main() {
 	int sockfd;
 	char buffer[MAXLINE];
-	char *hello = "Hello from client, this is another test";
+	char *hello = "Hello from client, this is a UDP packet";
 	struct sockaddr_in	 servaddr;
 	
 	// Creating socket file descriptor
-	if ( (sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) {
+	if ( (sockfd = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) < 0 ) {
 		perror("socket creation failed");
 		exit(EXIT_FAILURE);
 	}
